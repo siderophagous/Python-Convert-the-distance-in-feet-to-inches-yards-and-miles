@@ -1,46 +1,39 @@
-# Python Program for simple Unit Converter
 
-num1 = input('Enter the value: ')
-unit1 = input('Which unit do you want it converted from:  ')
-unit2 = input('Which unit do you want it converted to: ')
+# Define a dictionary for conversion factors with user-friendly unit names
+conversion_factors = {
+    "cm_to_m": ("Centimeters to Meters", 0.01),
+    "mm_to_cm": ("Millimeters to Centimeters", 0.1),
+    "m_to_cm": ("Meters to Centimeters", 100),
+    "cm_to_mm": ("Centimeters to Millimeters", 10),
+    "m_to_mm": ("Meters to Millimeters", 1000),
+    "km_to_m": ("Kilometers to Meters", 1000),
+    "m_to_km": ("Meters to Kilometers", 0.001),
+    "mm_to_km": ("Millimeters to Kilometers", 0.000001),
+    "ft_to_cm": ("Feet to Centimeters", 30.48),
+    "ft_to_mm": ("Feet to Millimeters", 304.8),
+    "ft_to_inch": ("Feet to Inches", 12),
+    "inch_to_cm": ("Inches to Centimeters", 2.54),
+    "inch_to_mm": ("Inches to Millimeters", 25.4),
+}
 
-if unit1 == "cm" and unit2 == "m":
-    ans = float(num1)/100
+# Display the list of conversion options to the user
+print("Select a conversion option:")
+for index, (conversion_desc, _) in enumerate(conversion_factors.values(), start=1):
+    print(f"{index}. {conversion_desc}")
+
+# Prompt the user to choose a conversion option
+choice = int(input("Enter the number of your choice: "))
+
+# Ensure the user's choice is within a valid range
+if 1 <= choice <= len(conversion_factors):
+    # Get the selected conversion key and its conversion factor
+    conversion_key, (_, conversion_factor) = list(conversion_factors.items())[choice - 1]
+
+    # Input from the user
+    num1 = float(input('Enter the value: '))
+
+    # Perform the conversion
+    ans = num1 * conversion_factor
     print(ans)
-elif unit1 == "mm" and unit2 == "cm":
-    ans = float(num1)/10
-    print(ans)
-elif unit1 == "m" and unit2 == "cm":
-    ans = float(num1)*100
-    print(ans)
-elif unit1 == "cm" and unit2 == "mm":
-    ans = float(num1)*10
-    print(ans)
-elif unit1 == "mm" and unit2 == "m":
-    ans = float(num1)/1000
-    print(ans)
-elif unit1 == "m" and unit2 == "mm":
-    ans = float(num1)*1000
-    print(ans)
-elif unit1 == "km" and unit2 == "m":
-    ans = float(num1)*1000
-    print(ans)
-elif unit1 == "m" and unit2 == "km":
-    ans = float(num1)/1000
-    print(ans)
-elif unit1 == "mm" and unit2 == "km":
-    ans = float(num1)/1000000
-    print(ans)
-elif unit1 == "ft" and unit2 == "cm":
-    ans = float(num1)*30.48
-    print(ans)
-elif unit1 == "ft" and unit2 == "mm":
-    ans = float(num1)*304.8
-    print(ans)
-elif unit1 == "ft" and unit2 == "inch":
-    ans = float(num1)*12
-    print(ans)
-elif unit1 == "inch" and unit2 == "cm":
-    ans = float(num1)*2.54
-elif unit1 == "inch" and unit2 == "mm":
-    ans = float(num1)*25.4
+else:
+    print("Invalid choice. Please select a valid conversion option.")
